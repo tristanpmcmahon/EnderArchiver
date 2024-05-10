@@ -2,7 +2,7 @@
 A PowerShell script to automate modded MC instance backups.
 
 ## Requirements
-- **PowerShell**: 5.0 or later.
+- **PowerShell**: 5.0 or later
 
 ## Configuration
 Configure the script in `config.json`, which must be in the same directory as the script:
