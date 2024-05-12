@@ -1,4 +1,4 @@
-$version = "1.0.0 (2024-05-11)"
+$version = "1.0.1 (2024-05-12)"
 
 # load config from JSON file located in the same directory
 $configPath = Join-Path -Path $PSScriptRoot -ChildPath "config.json"
@@ -28,7 +28,7 @@ function MakeBackup {
 
     # setup name/path of zip file to create with timestamp
     $date = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
-    $zipFilePath = "$destinationPath\$prefix-$globalPrefix-$date.zip"
+    $zipFilePath = Join-Path -Path $destinationPath -ChildPath "$prefix-$globalPrefix-$date.zip"
     # store the path in this reference var
     $zipPath.Value = $zipFilePath
 
@@ -62,7 +62,8 @@ function MakeBackup {
 
     # compress the copied files into a zip archive using 7zip
     # compression level -mx=5 is about the same as what the GUI uses
-    $arguments = "a -tzip `"$zipFilePath`" `"$tempPath\*`" -mx=5 -mmt=$threads"
+    $tempPathWildcard = Join-Path -Path $tempPath -ChildPath "*"
+    $arguments = "a -tzip `"$zipFilePath`" `"$tempPathWildcard`" -mx=5 -mmt=$threads"
     $process = Start-Process -FilePath $sevenZipPath -ArgumentList $arguments -NoNewWindow -Wait -PassThru
     if ($process.ExitCode -ne 0) {
         Write-Host "`n`n[EnderArchiver/ERROR]: 7-Zip failed with exit code $($process.ExitCode)" -ForegroundColor Red
@@ -90,7 +91,7 @@ try {
 
     # backup saves directory
     Write-Host "[EnderArchiver]: Starting backup of saves directory..." -ForegroundColor Yellow
-    $subSource = Join-Path -Path $instancePath -ChildPath "minecraft\saves"
+    $subSource = Join-Path -Path (Join-Path -Path $instancePath -ChildPath "minecraft") -ChildPath "saves"
     MakeBackup -sourcePath $subSource -destinationPath $destination -prefix "saves" -zipPath ([ref]$savesZipPath)
     Write-Host "[EnderArchiver]: Saves backup complete" -ForegroundColor Yellow
 
