@@ -91,8 +91,9 @@ try {
 
     # backup saves directory
     Write-Host "[EnderArchiver]: Starting backup of saves directory..." -ForegroundColor Yellow
-    $subSource = Join-Path -Path (Join-Path -Path $instancePath -ChildPath "minecraft") -ChildPath "saves"
-    MakeBackup -sourcePath $subSource -destinationPath $destination -prefix "saves" -zipPath ([ref]$savesZipPath)
+    $mcDirPath = Join-Path -Path $instancePath -ChildPath "minecraft"
+    $savesDirPath = Join-Path -Path $mcDirPath -ChildPath "saves"
+    MakeBackup -sourcePath $savesDirPath -destinationPath $destination -prefix "saves" -zipPath ([ref]$savesZipPath)
     Write-Host "[EnderArchiver]: Saves backup complete" -ForegroundColor Yellow
 
     # mark end time, calculate duration
