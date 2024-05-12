@@ -1,28 +1,60 @@
+![logo](assets/logo.svg)
+
 # EnderArchiver
 A PowerShell script to automate modded MC instance backups.
 
 ## Requirements
-- **PowerShell**: 5.0 or later
+- [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows): 5.0 or later
+- [7-Zip](https://www.7-zip.org/): Tested on 23.01 (2023-06-20)
 
 ## Configuration
 Configure the script in `config.json`, which must be in the same directory as the script:
-- `instancePath`: Path to your instance directory
-- `destinationPath`: Path to where backup files are stored
 - `packName`: Name of your modpack
 - `packVersion`: Version of your modpack
+- `instancePath`: Path to your instance directory
+- `destinationPath`: Path to where backup files are stored
+- `tempPath`: Path to where temporary files are stored
+- `sevenZipPath`: Path to where 7-Zip is installed
+- `threads`: Number of threads to use for file copying and compression
+
+If on Windows, you can find how many threads your computer has with the command-line utility `WMIC`:
+```powershell
+WMIC cpu get numberofLogicalProcessors
+```
+
 > [!NOTE]
-> The script assumes your saves directory is in: `instance\minecraft\saves`
+> The script assumes your saves directory is in: `instancePath\minecraft\saves`
+
+An example configuration file:
+
+```json
+{
+    "packName": "atm9",
+    "packVersion": "0.2.58",
+    "instancePath": "C:\\Users\\user\\AppData\\Roaming\\PrismLauncher\\instances\\All the Mods 9 - ATM9",
+    "destinationPath": "D:\\backup\\mc\\atm9",
+    "tempPath": "D:\\backup\\mc\\atm9\\temp",
+    "sevenZipPath": "C:\\Program Files\\7-Zip\\7z.exe",
+    "threads": 8
+}
+```
 
 ## Running the script
 Execute the PowerShell script by running:
 ```powershell
-.\EnderArchiver.ps1
+powershell .\EnderArchiver.ps1
 ```
+If running scripts is disabled, you can temporarily bypass this by running:
+```powershell
+powershell -ExecutionPolicy Bypass -File .\EnderArchiver.ps1
+```
+
+Alternatively, you can run the provided batch file, `ea-wrapper.bat`, or [change your execution policies](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies).
 
 ## Outputs
 The script will make a backup of your `instancePath` directory and the `saves` subdirectory, in this format:
-- Instance backup: `packName-packVersion-instance-yyyy-MM-dd_HH-mm-ss.zip`
-- Saves backup: `packName-packVersion-saves-yyyy-MM-dd_HH-mm-ss.zip`
+- Instance backup: `instance-packName-packVersion-yyyy-MM-dd_HH-mm-ss.zip`
+- Saves backup: `saves-packName-packVersion-yyyy-MM-dd_HH-mm-ss.zip`
 
 ## Troubleshooting
 - Ensure all paths in `config.json` are correct and accessible

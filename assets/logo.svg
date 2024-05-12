@@ -1,0 +1,12 @@
+<svg
+  width="200px"
+  height="100px"
+  viewBox="0 0 200 100"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- archive box -->
+  <rect x="20" y="30" width="70" height="50" fill="#161616" />
+  <rect x="25" y="25" width="60" height="10" fill="#4C2A85" />
+  <!-- text -->
+  <text x="100" y="70" font-family="Arial" font-size="40" fill="#4C2A85">ea_</text>
+</svg>
