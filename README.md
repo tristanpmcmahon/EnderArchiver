@@ -21,10 +21,6 @@ If on Windows, you can find how many threads your computer has with the command-
 ```powershell
 WMIC cpu get numberofLogicalProcessors
 ```
-
-> [!NOTE]
-> The script assumes your saves directory is in: `instancePath\minecraft\saves`
-
 An example configuration file:
 
 ```json
@@ -55,6 +51,8 @@ Alternatively, you can run the provided batch file, `ea-wrapper.bat`, or [change
 The script will make a backup of your `instancePath` directory and the `saves` subdirectory, in this format:
 - Instance backup: `instance-packName-packVersion-yyyy-MM-dd_HH-mm-ss.zip`
 - Saves backup: `saves-packName-packVersion-yyyy-MM-dd_HH-mm-ss.zip`
+> [!NOTE]
+> The script assumes your saves directory is in: `instancePath\minecraft\saves`
 
 ## Troubleshooting
 - Ensure all paths in `config.json` are correct and accessible
