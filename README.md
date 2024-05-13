@@ -13,7 +13,6 @@ Configure the script in `config.json`, which must be in the same directory as th
 - `packVersion`: Version of your modpack
 - `instancePath`: Path to your instance directory
 - `destinationPath`: Path to where backup files are stored
-- `tempPath`: Path to where temporary files are stored
 - `sevenZipPath`: Path to where 7-Zip is installed
 - `threads`: Number of threads to use for file copying and compression
 
@@ -29,7 +28,6 @@ An example configuration file:
     "packVersion": "0.2.58",
     "instancePath": "C:\\Users\\user\\AppData\\Roaming\\PrismLauncher\\instances\\All the Mods 9 - ATM9",
     "destinationPath": "D:\\backup\\mc\\atm9",
-    "tempPath": "D:\\backup\\mc\\atm9\\temp",
     "sevenZipPath": "C:\\Program Files\\7-Zip\\7z.exe",
     "threads": 8
 }
@@ -53,6 +51,8 @@ The script will make a backup of your `instancePath` directory and the `saves` s
 - Saves backup: `saves-packName-packVersion-yyyy-MM-dd_HH-mm-ss.zip`
 > [!NOTE]
 > The script assumes your saves directory is in: `instancePath\minecraft\saves`
+
+In the same directory as the script, log files and temporary files are generated in folders named `ea-logs` and `ea-temp`, respectively.
 
 ## Troubleshooting
 - Ensure all paths in `config.json` are correct and accessible

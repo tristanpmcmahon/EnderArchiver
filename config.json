@@ -3,7 +3,6 @@
     "packVersion": "YourPackVersion",
     "instancePath": "C:\\path\\to\\instance\\folder",
     "destinationPath": "C:\\path\\to\\backups\\folder",
-    "tempPath": "C:\\path\\to\\temp\\folder",
     "sevenZipPath": "C:\\Program Files\\7-Zip\\7z.exe",
     "threads": 8
 }
